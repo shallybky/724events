@@ -21,10 +21,17 @@ describe("When Form is created", () => {
           bubbles: true,
         })
       );
-      await screen.findByText("En cours");
-      // Utilisation de waitFor pour tester fonction asynchrone
-      await waitFor(() => screen.findByText("Envoyer"), {timeout:2000});
+      // Ajoutez une attente pour le texte "En cours"
+      await waitFor(() => {
+        expect(screen.getByText("En cours")).toBeInTheDocument();
+      });
+
+      // Ajoutez une attente pour le texte "Envoyer"
+      await waitFor(() => {
+        expect(screen.getByText("Envoyer")).toBeInTheDocument();
+      });
+
       expect(onSuccess).toHaveBeenCalled();
-    });
   });
+});
 });
